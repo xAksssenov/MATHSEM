@@ -779,11 +779,11 @@ video {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
 }
 
 .main__items.active {
-  height: 80vh;
+  min-height: 60vh;
+  margin: 1rem;
 }
 
 .cont {
@@ -811,7 +811,7 @@ video {
 
 .cont__textarea {
   width: 40rem;
-  height: 15rem;
+  height: 10rem;
   margin: 1rem;
   padding: 1rem 2rem;
   background: #EBDDDD;
@@ -883,7 +883,45 @@ hr {
   margin: 1rem 0;
 }
 
-/* Добавление стилей для checkbox */
 input[type="checkbox"] {
   margin-right: 0.5rem;
+}
+
+.comment {
+  margin: 1.5rem;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #EBDDDD;
+  text-align: start;
+}
+
+.comment strong {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.comment p {
+  margin: 0;
+}
+
+.cont__label {
+  margin-top: 1.5rem;
+  font-size: 1.3rem;
+}
+
+.cont__label.active {
+  display: flex;
+  flex-direction: column;
+}
+
+#notification {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: green;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  display: none;
 }

@@ -11,6 +11,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <title>Mathsem</title>
 </head>
 
@@ -29,7 +30,7 @@
                 <div class="flex justify-center">
                     <a href="index.html" class="px-4 py-2 bg-slate-200 rounded-2xl  ">К программе</a>
                     <a href="registration.html" class="px-4 py-2 bg-slate-200 rounded-2xl  ">Регистрация</a>
-					<a href="#" class="px-4 py-2 bg-slate-200 rounded-2xl  ">Отзыв</a>
+                    <a href="#" class="px-4 py-2 bg-slate-200 rounded-2xl  ">Отзыв</a>
                     <a href="help_with_programm.html" class="px-4 py-2 bg-slate-200 rounded-2xl  ">Помощь</a>
                 </div>
             </div>
@@ -37,11 +38,20 @@
     </header>
     <main class="main__items active">
         <div class="cont">
-            <h1 class="cont__h">Пожалуйста напишите свой отзыв ниже</h1>
+            <h1 class="cont__h">Пожалуйста, напишите свой отзыв ниже</h1>
             <div>
-                <textarea class="cont__textarea" name="" id="" cols="30" rows="10"></textarea>
+                <label for="userName" class="cont__label"> Напишите ваше имя:
+                    <input class="cont__input" type="text" id="userName" placeholder="Ваше имя">
+                </label>
             </div>
-            <a class="cont__button" href="index.html" type="submit">Отправить</a>
+            <div>
+                <label for="commentText" class="cont__label active"> Напишите свой комментарий:
+                    <textarea class="cont__textarea" id="commentText" cols="30" rows="10"
+                        placeholder="Ваш комментарий"></textarea>
+                </label>
+            </div>
+            <button class="cont__button" onclick="submitComment()">Отправить</button>
+            <div id="commentsContainer"></div>
         </div>
     </main>
     <footer class="bg-slate-700 text-white">
@@ -49,6 +59,37 @@
             <p>©mospolytech</p>
         </div>
     </footer>
+    <script>
+        function submitComment() {
+            var userName = document.getElementById('userName').value
+            var commentText = document.getElementById('commentText').value
+
+            var commentElement = document.createElement('div')
+            commentElement.classList.add('comment')
+            commentElement.innerHTML = '<strong>Имя: ' + userName + '</strong><p>Комментарий: ' + commentText + '</p>'
+
+            var commentsContainer = document.getElementById('commentsContainer')
+            commentsContainer.appendChild(commentElement)
+
+            document.getElementById('userName').value = ''
+            document.getElementById('commentText').value = ''
+
+            showNotification("Комментарий добавлен!");
+
+            console.log('Добавлен комментарий:', userName, commentText);
+        }
+
+        function showNotification(message) {
+            var notification = document.getElementById('notification');
+            notification.innerText = message;
+            notification.style.display = 'block';
+
+            setTimeout(function () {
+                notification.style.display = 'none';
+            }, 3000);
+        }
+    </script>
+    <div id="notification"></div>
 </body>
 
 </html>
