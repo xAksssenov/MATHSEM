@@ -22,14 +22,18 @@
 				</div>
 			</nav>
 			<div class="info text-center mt-10">
-				<h1 class="font-medium text-2xl text-white ">Программа MATHSEM</h1>
+				<div class="flex justify-center">
+                    <img style="width: 200px; " src="/src/img/icon.png" alt="">
+                </div>
+				<h1 class="font-medium text-2xl text-white ">Программа M∀thS∃m</h1>
 				<p class="font-light text-xl text-white  mt-8 mb-10">Программа, которая способна находить
 					закономерности</p>
-				<div class="flex justify-center">
-					<a href="index.html" class="px-4 py-2 bg-slate-200 rounded-2xl  ">К программе</a>
-					<a href="registration.html" class="px-4 py-2 bg-slate-200 rounded-2xl  ">Регистрация</a>
-					<a href="comment.html" class="px-4 py-2 bg-slate-200 rounded-2xl  ">Отзыв</a>
-                    <a href="#" class="px-4 py-2 bg-slate-200 rounded-2xl  ">Помощь</a>
+				<div class="section__nav">
+					<a href="index.html" class="px-4 py-2 bg-slate-200 rounded-2xl">К программе</a>
+					<a href="registration.html" class="px-4 py-2 bg-slate-200 rounded-2xl">Регистрация</a>
+					<a href="comment.html" class="px-4 py-2 bg-slate-200 rounded-2xl">Отзывы</a>
+					<a href="#" class="px-4 py-2 bg-slate-200 rounded-2xl">Помощь по сайту</a>
+					<a href="#" class="px-4 py-2 bg-slate-200 rounded-2xl">Написать на почту</a>
 				</div>
 			</div>
 		</div>
@@ -37,19 +41,19 @@
 	<main class="main__items active">
         <div class="cont">
             <h1 class="cont__h1">Возникли проблемы с программой</h1>
-            <h2 class="cont__h2">Для этого свяжитесь с нами</h2>
+            <h2 class="cont__title">Для этого свяжитесь с нами</h2>
             <form action="" method="post">
                 <div>
-                    <input placeholder="Имя:" class="cont__inp" type="email">
+                    <input id="name" placeholder="Имя:" class="cont__inp" type="email">
                 </div>
                 <div>
-                    <input placeholder="Почта:" class="cont__inp" type="password">
+                    <input id="pochta" placeholder="Почта:" class="cont__inp" type="email">
                 </div>
                 <div>
-                    <input placeholder="Пароль:" class="cont__inp" type="password">
+                    <input id="password" placeholder="Текст:" class="cont__inp text" type="text">
                 </div>
             </form>
-            <a class="cont__button" href="index.html" type="submit">Отправить</a>
+            <button class="cont__button" onclick="submitComment()">Отправить</button>
 			<h2 class="cont__h2">В течение двух дней после подачи заявки, 
 				вам придет наш ответ. </h2>
         </div>
@@ -59,6 +63,35 @@
 			<p>©mospolytech</p>
 		</div>
 	</footer>
+	<script>
+		function submitComment() {
+			const name = document.getElementById('name').value
+            const pochta = document.getElementById('pochta').value
+            const password = document.getElementById('password').value
+
+            if (name.trim() === '' || pochta.trim() === '' || password.trim() === '') {
+                showNotification('Заполните все поля')
+                return
+            }
+
+            document.getElementById('name').value = ''
+            document.getElementById('pochta').value = ''
+            document.getElementById('password').value = ''
+
+            showNotification("Ваш вопрос отправлен!");
+        }
+
+		function showNotification(message) {
+            const notification = document.getElementById('notification')
+            notification.innerText = message
+            notification.style.display = 'block'
+
+            setTimeout(function () {
+                notification.style.display = 'none'
+            }, 3000)
+        }
+	</script>
+	<div id="notification"></div>
 </body>
 
 </html>
