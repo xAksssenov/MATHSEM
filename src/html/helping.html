@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../../dist/output.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
+		rel="stylesheet">
+	<title>Mathsem</title>
+</head>
+
+<body>
+	<header class="header min-h-300 ">
+		<div class="container mx-auto p-8 ">
+			<nav class="flex justify-end">
+				<div class="bg-opacity-70 bg-slate-200 pt-3 pb-3 pl-8 pr-8 rounded-2xl text-xl font-medium text-center">
+					<a href="https://mospolytech.ru" class="text-black">Московский</br>политех</p>
+				</div>
+			</nav>
+			<div class="info text-center mt-10">
+				<div class="flex justify-center">
+                    <img style="width: 200px; " src="/src/img/icon.png" alt="">
+                </div>
+				<h1 class="font-medium text-2xl text-white ">Программа M∀thS∃m</h1>
+				<p class="font-light text-xl text-white  mt-8 mb-10">Программа, которая способна находить
+					закономерности</p>
+				<div class="section__nav">
+					<a href="index.html" class="px-4 py-2 bg-slate-200 rounded-2xl">К программе</a>
+					<a href="registration.html" class="px-4 py-2 bg-slate-200 rounded-2xl">Регистрация</a>
+					<a href="comment.html" class="px-4 py-2 bg-slate-200 rounded-2xl">Отзывы</a>
+					<a href="#" class="px-4 py-2 bg-slate-200 rounded-2xl">Помощь по сайту</a>
+					<a href="help_with_programm.html" class="px-4 py-2 bg-slate-200 rounded-2xl">Написать на почту</a>
+				</div>
+			</div>
+		</div>
+	</header>
+	<main>
+		<section class="feedback">
+			<div class="container mx-auto p-8">
+				<h2 class="text-2xl font-bold text-center">Помощь по сайту</h2>
+				<p class="text-xl font-light text-center">Ниже вы можете прочесть представленный нами справочник</p>
+				<div class="flex flex-row items-center justify-center gap-4">
+                    <button class="bg-slate-200 max-w-4xl p-4 rounded-2xl mb-8 mt-8" onclick="searchText()">Поиск</button>
+                    <input class="bg-orange-200 max-w-4xl p-4 rounded-2xl mb-8 mt-8" type="text" id="searchInput" placeholder="Введите текст для поиска">
+                </div>
+                <ul class="flex-col items-center justify-center ">
+					<li class="mx-auto flex justify-center items-center bg-orange-200 max-w-4xl p-4 rounded-2xl mb-8 mt-8">
+						<ul class="ml-4"> <strong>Логические операции</strong>
+                            <li>
+                                1. Логическим связкам соответствуют логические операции над 
+                                высказываниями: отрицание, конъюнкция, дизъюнкция, импликация, 
+                                эквивалентность:
+                            </li>
+                            <li>
+                                2. Отрицанием высказывания Р называется высказывание, 
+                                которое истинно только тогда, когда высказывание Р ложно. 
+                                Обозначается 
+                                -
+                                Р или 
+                                P . Операции соответствует логическая связка 
+                                «не». 
+                            </li>
+                            <li>
+                                3. Конъюнкцией двух высказываний P и Q называется 
+                                высказывание, истинное тогда и только тогда, когда истинны оба 
+                                высказывания. Обозначается P&Q или Р/\Q. Операции соответствует 
+                                логическая связка «и».
+                            </li>
+                            <li>
+                                4. Дизъюнкцией двух высказываний P и Q называется 
+                                высказывание, ложное тогда и только тогда, когда оба высказывания 
+                                ложны. Обозначается P\/Q. Операции соответствует логическая 
+                                связка «или».
+                            </li>
+                            <br>
+                            <strong>Понравилось? Прочитайте полностью нашу справку...</strong>
+                            <button class="cont__button" onclick="downloadFile('/dist/element1.pdf')">Скачать справочник</button>
+                        </ul>     
+					</li>
+					<li class="mx-auto flex justify-center items-center bg-orange-200 max-w-4xl p-4 rounded-2xl mb-8 mt-8">
+						<ul class="ml-4"> <strong>Множества и операции над ними</strong>
+                            <li>
+                                Множество может содержать любое число элементов, конечное 
+                                и бесконечное. Множество может содержать один элемент и ни 
+                                одного. Множество, не содержащее ни одного элемента, называется 
+                                пустым множеством и обозначается символом ∅. 
+                                Способы задания множеств
+                                Рассмотрим основные способы задания множеств: 
+                            </li>
+                            <li>
+                                1. путем прямого перечисления его элементов, заключенных в 
+                                фигурные скобки. При этом, если элменты a, b, c, d принадлежат 
+                                множеству А, то это можно записать так: А={a, b, c, d}.
+                            </li>
+                            <li>
+                                2. указанием свойств, которым элементы множества должны 
+                                удовлетворять, или заданием порождающей процедуры или с 
+                                помощью свойства, характеризующего элементы множества
+                            </li>
+                            <br>
+                            <strong class="mt-4">Понравилось? Прочитайте полностью нашу справку...</strong>
+                            <button class="cont__button" onclick="downloadFile('/dist/element2.pdf')">Скачать справочник</button>
+                        </ul>
+					</li>
+					<li class="mx-auto flex justify-center items-center bg-orange-200 max-w-4xl p-4 rounded-2xl mb-8 mt-8">
+						<ul class="ml-4"> <strong>Введение в математическую логику</strong>
+                            <li>
+                                1. Объединение, пересечение и дополнение обычно называются булевыми операциями, 
+                                составленные из множеств с их помощью выражения – булевыми выражениями, значение 
+                                такого выражения – булевой комбинацией входящих в него множеств, а равенство
+                                двух булевых выражений – булевыми тождествами
+                            </li>
+                            <li>
+                                2. Упорядоченная пара <x, y> интуитивно определяется как совокупность, состоящая из
+                                двух элементов x и y, расположенных в определенном порядке. Элементы x и y называют соответственно первой и 
+                                второй компонентами упорядоченной пары.                            
+                            </li>
+                            <br>
+                            <strong>Понравилось? Прочитайте полностью нашу справку...</strong>
+                            <button class="cont__button" onclick="downloadFile('/dist/element3.pdf')">Скачать справочник</button>
+                        </ul>
+					</li>
+				</ul>
+			</div>
+		</section>
+	</main>
+	<footer class="bg-slate-700 text-white">
+		<div class="container mx-auto p-8">
+			<p>©mospolytech</p>
+		</div>
+	</footer>
+    <script>
+        function downloadFile(url) {
+            var link = document.createElement('a')
+            link.href = url
+            link.download = 'справочник.pdf'
+            document.body.appendChild(link)
+            link.click()
+            document.body.removeChild(link)
+        }
+
+        function searchText() {
+            var input, filter, ul, li, strong, i, j, txtValue
+            input = document.getElementById('searchInput')
+            filter = input.value.toUpperCase()
+            ul = document.querySelector('ul')
+            li = ul.getElementsByTagName('li')
+
+            for (i = 0; i < li.length; i++) {
+                const innerText = li[i].innerText || li[i].textContent
+                if (innerText.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = ''
+                    const regex = new RegExp(filter, 'gi')
+                    const newText = innerText.replace(regex, function(match) {
+                        return match
+                    })
+                    li[i].innerHTML = newText
+                } else {
+                    li[i].style.display = 'none'
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

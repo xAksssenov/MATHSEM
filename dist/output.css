@@ -949,4 +949,12 @@ input[type="checkbox"] {
   .section__nav {
     flex-direction: column;
   }
+
+  .cont {
+    width: 350px;
+  }
+
+  .cont__textarea {
+    width: 300px;
+  }
 }
