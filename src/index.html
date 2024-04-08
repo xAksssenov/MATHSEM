@@ -19,7 +19,7 @@
 		<div class="container mx-auto p-8 ">
 			<nav class="flex justify-end">
 				<div class="bg-opacity-70 bg-slate-200 pt-3 pb-3 pl-8 pr-8 rounded-2xl text-xl font-medium text-center">
-					<a href="https://mospolytech.ru" class="text-black">Московский</br>политех</p>
+					<a href="https://mospolytech.ru" class="text-black">Московский</br>Политех</p>
 				</div>
 			</nav>
 			<div class="info text-center mt-10">
@@ -94,28 +94,25 @@
 		</section>
 		<section class="feedback">
 			<div class="container mx-auto p-8">
-				<h2 class="text-2xl font-bold text-center">Отзывы</h2>
-				<p class="text-xl font-light text-center">Ниже вы можете прочесть отзывы пользователей нашей программы</p>
+				<h2 class="text-2xl font-bold text-center">Основная информация о программе</h2>
+				<p class="text-xl font-light text-center">Ниже вы можете прочесть описание нашей программы</p>
 				<ul class="flex-col items-center justify-center ">
 					<li class="mx-auto flex justify-center items-center bg-orange-200 max-w-4xl p-4 rounded-2xl mb-8 mt-8">
-						<img src="img/feedback-1.jpg" alt="feedback-1" class="rounded-full w-24 ">
-						<p class="ml-4 text-center">Мне как учителю математики очень понравилось данная программа</p>
+						<p class="ml-4 text-center">Программный продукт MATHSEM будет использоваться для обучения студентов дискретной математике. Функционал программы позволяет строить  понятия, аксиомы и теоремы из теории множеств, теории функций и отношений, теории графов, геометрии.</p>
 					</li>
 					<li class="mx-auto flex justify-center items-center bg-orange-200 max-w-4xl p-4 rounded-2xl mb-8 mt-8">
-						<img src="img/feedback-2.jpg" alt="feedback-2" class="rounded-full w-24">
-						<p class="ml-4 text-center">Мне как учителю математики очень понравилось данная программа</p>
+						<p class="ml-4 text-center">Будет возможность изучать формальные методы доказательств теорем (метод резолюций, метод аналитических таблиц, метод основанный на знании атомарной структуру теоремы). Можно строить семантические сети понятий и теорем теорий, просмотреть деревья доказательств.</p>
 					</li>
 					<li class="mx-auto flex justify-center items-center bg-orange-200 max-w-4xl p-4 rounded-2xl mb-8 mt-8">
-						<img src="img/feedback-3.jpg" alt="feedback-3" class="rounded-full w-24">
-						<p class="ml-4 text-center">Мне как учителю математики очень понравилось данная программа</p>
+						<p class="ml-4 text-center">Можно изучать связь формальных методов доказательств и естественных. Возможно наладить взаимодействие с известными программами по автоматическому доказательству теорем и системами компьютерной алгебры. Можно осуществить экспорт/импорт данных из программы MATHSEM в другие известные программы.</p>
 					</li>
 					<li class="mx-auto flex justify-center items-center bg-orange-200 max-w-4xl p-4 rounded-2xl mb-8 mt-8 ">
-						<img src="img/feedback-4.jpg" alt="feedback-4" class="rounded-full w-24 ">
-						<p class="text-center ml-4">Мне как учителю математики очень понравилось данная программа</p>
+						<p class="text-center ml-4">В программе MАTHSEM  можно строить различные алгоритмы и эвристики для построения определений, теорем. Можно использовать различные эвристики для доказательства теорем. Предполагается создать удобный интерфейс для работы с программой, систему справки и обучающие видео.
+							Программу нужно продавать российским и зарубежным университетам, компаниям и частным лицам.</p>
 					</li>
 				</ul>
 				<div class="flex justify-center">
-					<a href="comment.html" class="px-4 py-2 bg-orange-200 rounded-2xl">Просмотреть все отзывы</a>
+					<button onclick="downloadFile('exe/Mathsem.zip')" class="px-4 py-2 bg-orange-200 rounded-2xl">Скачать пример программы</button>
 				</div>
 			</div>
 		</section>
@@ -125,6 +122,16 @@
 			<p>©mospolytech</p>
 		</div>
 	</footer>
+	<script>
+		function downloadFile(url) {
+            const link = document.createElement('a')
+            link.href = url
+            link.download = 'Mathsem.zip'
+            document.body.appendChild(link)
+            link.click()
+            document.body.removeChild(link)
+        }
+	</script>
 </body>
 
 </html>

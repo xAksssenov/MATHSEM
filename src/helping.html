@@ -18,7 +18,7 @@
 		<div class="container mx-auto p-8 ">
 			<nav class="flex justify-end">
 				<div class="bg-opacity-70 bg-slate-200 pt-3 pb-3 pl-8 pr-8 rounded-2xl text-xl font-medium text-center">
-					<a href="https://mospolytech.ru" class="text-black">Московский</br>политех</p>
+					<a href="https://mospolytech.ru" class="text-black">Московский</br>Политех</p>
 				</div>
 			</nav>
 			<div class="info text-center mt-10">
@@ -135,7 +135,7 @@
 	</footer>
     <script>
         function downloadFile(url) {
-            var link = document.createElement('a')
+            const link = document.createElement('a')
             link.href = url
             link.download = 'справочник.pdf'
             document.body.appendChild(link)
@@ -144,7 +144,7 @@
         }
 
         function searchText() {
-            var input, filter, ul, li, strong, i, j, txtValue
+            let input, filter, ul, li, strong, i, j, txtValue
             input = document.getElementById('searchInput')
             filter = input.value.toUpperCase()
             ul = document.querySelector('ul')
