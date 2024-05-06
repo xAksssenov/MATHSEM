@@ -1,0 +1,45 @@
+<h2>загрузка</h2>
+<form action="/upload" method="post" enctype="multipart/form-data">
+  <div class="mb-3">
+    <label for="name" class="form-label">Имя</label>
+    <input type="text" class="form-control" id="name" name="name" required />
+  </div>
+  <div class="mb-3">
+    <label for="name_file" class="form-label">Название файла</label>
+    <input
+      type="text"
+      class="form-control"
+      id="NAME_FILE"
+      name="NAME_FILE"
+      required
+    />
+  </div>
+  <div class="mb-3">
+    <label for="file" class="form-label">Файл</label>
+    <input class="form-control" type="file" id="file" name="file" required />
+  </div>
+  <button type="submit" class="btn mt-4 btn-outline-secondary">
+    Отправить
+  </button>
+</form>
+<h2>Table</h2>
+<table class="table">
+  <thead>
+    <th scope="col">ID</th>
+    <th scope="col">Имя</th>
+    <th scope="col">Имя файла</th>
+    <th scope="col">Файл</th>
+    <th scope="col">Дата поста</th>
+  </thead>
+  <tbody>
+    <% data.forEach(row => { %>
+    <tr>
+      <td><%= row.ID %></td>
+      <td><%= row.NAME %></td>
+      <td><%= row.NAME_FILE %></td>
+      <td><a href="/<%= row.FILE %>">.DOCX</a></td>
+      <td><%= row.DATA_REG %></td>
+    </tr>
+    <% }) %>
+  </tbody>
+</table>
