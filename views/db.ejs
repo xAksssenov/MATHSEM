@@ -35,10 +35,10 @@
     <% data.forEach(row => { %>
     <tr>
       <td><%= row.ID %></td>
-      <td><%= row.NAME %></td>
-      <td><%= row.NAME_FILE %></td>
+      <td><%= row.name %></td>
+      <td><%= row.name_file %></td>
       <td><a href="/uploads/<%= row.FILE %>">Скачать</a></td>
-      <td><%= row.DATA_REG %></td>
+      <td><%= row.data_reg %></td>
     </tr>
     <% }) %>
   </tbody>
