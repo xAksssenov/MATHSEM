@@ -1,4 +1,4 @@
-<h2>загрузка</h2>
+<h2>Загрузка</h2>
 <form action="/upload" method="post" enctype="multipart/form-data">
   <div class="mb-3">
     <label for="name" class="form-label">Имя</label>
@@ -22,7 +22,7 @@
     Отправить
   </button>
 </form>
-<h2>Table</h2>
+<h2>Таблица</h2>
 <table class="table">
   <thead>
     <th scope="col">ID</th>
@@ -37,7 +37,7 @@
       <td><%= row.ID %></td>
       <td><%= row.NAME %></td>
       <td><%= row.NAME_FILE %></td>
-      <td><a href="/<%= row.FILE %>">.DOCX</a></td>
+      <td><a href="/uploads/<%= row.FILE %>">Скачать</a></td>
       <td><%= row.DATA_REG %></td>
     </tr>
     <% }) %>

@@ -1,72 +1,85 @@
 const express = require("express");
-const expressLayout=require("express-ejs-layouts")
+const expressLayout = require("express-ejs-layouts");
 const mysql = require("mysql");
 const multer = require("multer");
 const path = require("path");
 
 const app = express();
-// Configure storage for Multer
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, 'uploads/');
-    },
-    filename: function (req, file, cb) {
-      // Generate a unique filename with the original extension
-      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-      cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
-    }
-  });
-  
-  const upload = multer({ storage: storage });
-// const upload = multer({ dest: "uploads/" });
+
+// Подключение к базе данных MySQL
 const db = mysql.createConnection({
   host: "localhost",
   user: "admin",
   password: "admin",
-  database: "mathsem"
+  database: "mathsem",
 });
 
-db.connect(e=>{
-    if(e){
-        throw e
+// Проверка подключения к базе данных
+db.connect((e) => {
+  if (e) {
+    throw e;
+  }
+  console.log("Database connected");
+});
+
+// Настройка Multer для загрузки файлов
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "uploads/");
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    cb(
+      null,
+      file.fieldname + "-" + uniqueSuffix + path.extname(file.originalname)
+    );
+  },
+});
+
+const upload = multer({ storage: storage });
+
+// Установка движка представлений EJS
+app.set("view engine", "ejs");
+app.use(expressLayout);
+
+// Парсинг данных в форме
+app.use(express.urlencoded({ extended: true }));
+
+// Статические файлы
+app.use(express.static("public"));
+app.use("/uploads", express.static("uploads"));
+
+// Маршрут для отображения главной страницы
+app.get("/", (req, res) => {
+  res.render("layout", { ejsFile: "index", title: "index" });
+});
+
+// Маршрут для отображения данных из базы данных
+app.get("/db", (req, res) => {
+  db.query("SELECT * FROM users2", (err, result) => {
+    if (err) {
+      throw err;
     }
-    console.log("db ok")
-})
-app.use(express.urlencoded({extended:true}))
-app.use(express.static("public"))
-app.use("/uploads", express.static("uploads"))
-app.set("view engine","ejs")
-app.use(expressLayout)
+    res.render("layout", { data: result, ejsFile: "db", title: "DB" });
+  });
+});
 
-app.get("/",(request, response)=>{
-        response.render("layout",{ejsFile: 'index', title:'index'})
-})
+// Маршрут для загрузки файлов
+app.post("/upload", upload.single("file"), (req, res) => {
+  const { name, NAME_FILE } = req.body;
+  const filePath = req.file.path;
+  const sql = "INSERT INTO users2 (NAME, NAME_FILE, FILE) VALUES (?, ?, ?)";
 
-app.get("/db",(request, response)=>{
-    db.query("select * from users2", (e,result)=>{
-        if(e){
-            throw e
-        }
-        response.render("layout",{data: result, ejsFile: 'db', title:'DB'})
-    })
-})
+  db.query(sql, [name, NAME_FILE, filePath], (err) => {
+    if (err) {
+      throw err;
+    }
+    res.redirect("/db");
+  });
+});
 
-app.post("/upload",upload.single("file"),(request, response)=>{
-    const{name, NAME_FILE}=request.body
-    //console.log(name, NAME_FILE)
-    const filePath=request.file.path
-    console.log(path.extname(filePath))
-    const sql = "insert into users2(NAME, NAME_FILE, FILE) values(?, ?, ?)"
-
-    db.query(sql, [name, NAME_FILE, filePath], (e)=>{
-        if(e){
-            throw e
-        }
-        response.redirect('db')
-    })
-})
-
-
-const port=process.env.PORT || 3000
-
-app.listen(port,()=>console.log(`ok port ${port}`))
+// Запуск сервера
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
