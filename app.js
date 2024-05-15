@@ -1,72 +1,54 @@
 const express = require("express");
-const expressLayout=require("express-ejs-layouts")
+const fileUpload = require("express-fileupload");
 const mysql = require("mysql");
-const multer = require("multer");
 const path = require("path");
 
 const app = express();
-// Configure storage for Multer
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, 'uploads/');
-    },
-    filename: function (_req, file, cb) {
-      // Generate a unique filename with the original extension
-      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-      cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
-    }
-  });
-  
-  const upload = multer({ storage: storage });
-// const upload = multer({ dest: "uploads/" });
+app.use(express.static("public"));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(fileUpload());
+
+// Настройка соединения с базой данных
 const db = mysql.createConnection({
   host: "localhost",
-  user: "admin",
-  password: "admin",
-  database: "mathsem"
+  user: "root",
+  password: "password",
+  database: "database_name",
 });
 
-db.connect(e=>{
-    if(e){
-        throw e
-    }
-    console.log("db ok")
-})
-app.use(express.urlencoded({extended:true}))
-app.use(express.static("public"))
-app.use("/uploads", express.static("uploads"))
-app.set("view engine","ejs")
-app.use(expressLayout)
+db.connect((err) => {
+  if (err) throw err;
+  console.log("Connected to database");
+});
 
-app.get("/",(_request, response)=>{
-        response.render("layout",{ejsFile: 'index', title:'index'})
-})
+// Маршрут для загрузки файлов
+app.post("/upload", (req, res) => {
+  const { name, NAME_FILE } = req.body;
+  const file = req.files.file;
 
-app.get("/db",(_request, response)=>{
-    db.query("select * from users2", (e,result)=>{
-        if(e){
-            throw e
-        }
-        response.render("layout",{data: result, ejsFile: 'db', title:'DB'})
-    })
-})
+  const uploadPath = path.join(__dirname, "uploads", file.name);
 
-app.post("/upload",upload.single("file"),(request, response)=>{
-    const{name, NAME_FILE}=request.body
-    //console.log(name, NAME_FILE)
-    const filePath=request.file.path
-    console.log(path.extname(filePath))
-    const sql = "insert into users2(NAME, NAME_FILE, FILE) values(?, ?, ?)"
+  file.mv(uploadPath, (err) => {
+    if (err) return res.status(500).send(err);
 
-    db.query(sql, [name, NAME_FILE, filePath], (e)=>{
-        if(e){
-            throw e
-        }
-        response.redirect('db')
-    })
-})
+    const query = "INSERT INTO files (name, name_file, file) VALUES (?, ?, ?)";
+    db.query(query, [name, NAME_FILE, file.name], (err, result) => {
+      if (err) throw err;
+      res.send("File uploaded and saved in database");
+    });
+  });
+});
 
+// Маршрут для отображения таблицы
+app.get("/data", (req, res) => {
+  const query = "SELECT * FROM files";
+  db.query(query, (err, results) => {
+    if (err) throw err;
+    res.json(results);
+  });
+});
 
-const port=process.env.PORT || 3000
-
-app.listen(port,()=>console.log(`ok port ${port}`))
+app.listen(3000, () => {
+  console.log("Server started on http://localhost:3000");
+});
