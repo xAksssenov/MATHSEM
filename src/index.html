@@ -1,121 +1,123 @@
 <!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="output.css" />
-    <title>Mathsem</title>
-    <link rel="icon" href="img/icon.png" />
-  </head>
-  <body>
-    <header class="header min-h-300">
-      <!-- Your header content -->
-    </header>
-    <main>
-      <section class="upload">
-        <h2>Загрузка</h2>
-        <form id="uploadForm" enctype="multipart/form-data">
-          <div class="mb-3">
-            <label for="name" class="form-label">Имя</label>
-            <input
-              type="text"
-              class="form-control"
-              id="name"
-              name="name"
-              required
-            />
-          </div>
-          <div class="mb-3">
-            <label for="name_file" class="form-label">Название файла</label>
-            <input
-              type="text"
-              class="form-control"
-              id="name_file"
-              name="NAME_FILE"
-              required
-            />
-          </div>
-          <div class="mb-3">
-            <label for="file" class="form-label">Файл</label>
-            <input
-              class="form-control"
-              type="file"
-              id="file"
-              name="file"
-              required
-            />
-          </div>
-          <button type="submit" class="btn mt-4 btn-outline-secondary">
-            Отправить
-          </button>
-        </form>
-      </section>
-      <section class="table">
-        <h2>Таблица</h2>
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">ID</th>
-              <th scope="col">Имя</th>
-              <th scope="col">Имя файла</th>
-              <th scope="col">Файл</th>
-              <th scope="col">Дата поста</th>
-            </tr>
-          </thead>
-          <tbody id="dataTable">
-            <!-- Данные будут загружены здесь -->
-          </tbody>
-        </table>
-      </section>
-    </main>
-    <footer class="bg-slate-700 text-white">
-      <div class="container mx-auto p-8">
-        <p>©mospolytech</p>
-      </div>
-    </footer>
-    <script>
-      document
-        .getElementById("uploadForm")
-        .addEventListener("submit", function (event) {
-          event.preventDefault();
-          const formData = new FormData(this);
 
-          fetch("/upload", {
-            method: "POST",
-            body: formData,
-          })
-            .then((response) => response.text())
-            .then((result) => {
-              alert(result);
-              loadData();
-            })
-            .catch((error) => {
-              console.error("Error:", error);
-            });
-        });
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="output.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
+		rel="stylesheet">
+	<title>Mathsem</title>
+	<link rel="icon" href="img/icon.png">
+</head>
 
-      function loadData() {
-        fetch("/data")
-          .then((response) => response.json())
-          .then((data) => {
-            const tableBody = document.getElementById("dataTable");
-            tableBody.innerHTML = "";
-            data.forEach((row) => {
-              const tr = document.createElement("tr");
-              tr.innerHTML = `
-              <td>${row.ID}</td>
-              <td>${row.name}</td>
-              <td>${row.name_file}</td>
-              <td><a href="/uploads/${row.file}">Скачать</a></td>
-              <td>${row.data_reg}</td>
-            `;
-              tableBody.appendChild(tr);
-            });
-          });
-      }
+<body>
+	<header class="header min-h-300 ">
+		<div class="container mx-auto p-8 ">
+			<nav class="flex justify-end">
+				<div class="bg-opacity-70 bg-slate-200 pt-3 pb-3 pl-8 pr-8 rounded-2xl text-xl font-medium text-center">
+					<a href="https://mospolytech.ru" class="text-black" target="_blank">Московский</br>Политех</p>
+				</div>
+			</nav>
+			<div class="info text-center mt-10">
+				<div class="flex justify-center">
+                    <img style="width: 200px;" src="img/icon.png" alt="">
+                </div>
+				<h1 class="font-medium text-2xl text-white ">Программа M∀thS∃m</h1>
+				<p class="font-light text-xl text-white  mt-8 mb-10">Программа, которая способна находить
+					закономерности</p>
+				<div class="section__nav">
+					<a href="#" class="px-4 py-2 bg-slate-200 rounded-2xl">К программе</a>
+					<a href="comment.html" class="px-4 py-2 bg-slate-200 rounded-2xl">Отзывы</a>
+					<a href="helping.html" class="px-4 py-2 bg-slate-200 rounded-2xl">Помощь по сайту</a>
+					<a href="help_with_programm.html" class="px-4 py-2 bg-slate-200 rounded-2xl">Написать на почту</a>
+          <a href="#" class="px-4 py-2 bg-slate-200 rounded-2xl">Просмотреть записи</a>
+				</div>
+			</div>
+		</div>
+	</header>
+	<main>
+		<section class="feedback">
+			<div class="container mx-auto p-8">
+				<h2 class="text-2xl font-bold text-center">Основная информация о программе</h2>
+				<p class="text-xl font-light text-center">Ниже вы можете прочесть описание нашей программы</p>
+				<div class="flex mt-8 justify-center">
+					<button onclick="downloadFile('exe/Mathsem.zip')" class="px-4 py-2 rounded-2xl" style="font-size: 1.2rem; background-color: black; color: white;">Скачать пример программы</button>
+				</div>
+				<div class="flex justify-center mt-8">
+					<div class="bg-gray-200 p-4 rounded-lg max-w-md">
+						<h3 class="text-lg font-semibold mb-2">Минимальные системные требования:</h3>
+						<ul class="list-disc ml-4">
+							<li>Операционная система: Windows 7/8/10</li>
+							<li>Процессор: Intel Core i3 или аналогичный</li>
+							<li>Оперативная память: 4 ГБ</li>
+							<li>Свободное место на жестком диске: 500 МБ</li>
+							<li>Графический адаптер: с поддержкой OpenGL 3.3 или выше</li>
+							<li>Интернет-соединение для загрузки и обновлений</li>
+						</ul>
+					</div>
+				</div>
+				<ul class="flex-col items-center justify-center ">
+					<li class="mx-auto flex justify-center items-center bg-orange-200 max-w-4xl p-4 rounded-2xl mb-8 mt-8">
+						<p class="ml-4 text-center">Математическая логика - это раздел математики, который изучает формализацию и структуру логических высказываний, рассуждений и выводов. Ее основная цель - разработать формальные методы для рассуждения о математических утверждениях и доказательства их истинности или ложности с помощью символов и формальных правил.</p>
+					</li>
+					<li class="mx-auto flex justify-center items-center bg-orange-200 max-w-4xl p-4 rounded-2xl mb-8 mt-8">
+						<p class="ml-4 text-center">Понятие простого (элементарного) высказывания является первоначальным (неопределяемым) понятием в математической логике. Под высказыванием обычно понимают повествовательное предложение, утверждающее что-либо о чем-либо, и при этом мы можем сказать, что оно должно быть истинным или ложным в данных условиях места и времени. Логическими значениями высказываний являются истина и ложь.</p>
+					</li>
+					<li class="mx-auto flex justify-center items-center bg-orange-200 max-w-4xl p-4 rounded-2xl mb-8 mt-8">
+						<p class="ml-4 text-center">Можно изучать связь формальных методов доказательств и естественных. Возможно наладить взаимодействие с известными программами по автоматическому доказательству теорем и системами компьютерной алгебры. Можно осуществить экспорт/импорт данных из программы MATHSEM в другие известные программы.</p>
+					</li>
+					<li class="mx-auto flex justify-center items-center bg-orange-200 max-w-4xl p-4 rounded-2xl mb-8 mt-8 ">
+						<p class="text-center ml-4">В программе MАTHSEM  можно строить различные алгоритмы и эвристики для построения определений, теорем. Можно использовать различные эвристики для доказательства теорем. Предполагается создать удобный интерфейс для работы с программой, систему справки и обучающие видео.
+							Программу нужно продавать российским и зарубежным университетам, компаниям и частным лицам.</p>
+					</li>
+				</ul>
+			</div>
+		</section>
+		<section class="tutor bg-orange-200">
+			<div class="container mx-auto p-8">
+				<h1 class="font-bold text-2xl text-center">Куратор программы</h1>
+				<img src="img/lux.jpg" alt="tutor" class="rounded-full mx-auto w-48 mt-8">
+				<p class="font-semibold text-center mt-4 text-2xl">Андрей Люксембург</p>
+				<p class="font-light text-center text-xl mt-4">Научный руководитель проекта MATHSEM,
+					по совместительству ответсвенный за его создание</p>
+			</div>
+		</section>
+		<section class="plans">
+			<div class="container mx-auto p-8">
+				<h2 class="font-semibold text-xl text-center">Планируемые результаты проекта и основная аудитория:</h2>
+				<ul class="list-outside list-disc flex flex-col items-center justify-center">
+					<li class="">
+						Студенты, аспиранты и научные работники, интересующиеся математикой и информатикой.
+					</li>
+					<li class="">
+						Университеты и научные организации, заинтересованные в использовании программы.
+					</li>
+					<li class="">
+						Онлайн-обучающие платформы и курсы по дискретной математике и математической логике.
+					</li>
+				</ul>
+			</div>
+		</section>
+	</main>
+	<footer class="bg-slate-700 text-white">
+		<div class="container mx-auto p-8">
+			<p>©mospolytech</p>
+		</div>
+	</footer>
+	<script>
+		function downloadFile(url) {
+        const link = document.createElement('a')
+        link.href = url
+        link.download = 'Mathsem.zip'
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+    }
+	</script>
+</body>
 
-      window.onload = loadData;
-    </script>
-  </body>
 </html>
